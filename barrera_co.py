@@ -17,6 +17,7 @@ Vo = 3.0
 a = 0.3e-18
 fig, ax = plt.subplots(figsize=(20, 10))
 
+lastKey = None
 def graficar():
     global Vo, a, sem, num_sam, point, point1, fig, ax
 
@@ -58,6 +59,8 @@ def graficar():
     plt.ylim(-0.2, 1.2)
     plt.text(6, 0.6, 'Presione "x" para mover el cursor hacia adelante.')
     plt.text(6, 0.55, 'Presione "z" para mover el cursor hacia atras.')
+    plt.text(6, 0.50, 'Presione "2","3" o "4" para cambiar el Vo.')
+
     plt.text(6, 0.9, 'Coeficiente de Transmision')
     plt.text(6, 0.05, 'Coeficiente de Reflexion')
     plt.grid(True)
@@ -70,14 +73,16 @@ def graficar():
     plt.legend([point, point1], [msg, msg1])
 
     def eventoClickB(num):
-        global Vo
-        Vo = num
-        print('hola ana')
-        plt.clf()
-        plt.cla()
-        plt.gcf().clear()
-        #plt.close()
-        graficar()
+        global Vo, lastKey
+        if lastKey != num:
+            lastKey = num
+            Vo = num
+            print('hola ana')
+            plt.clf()
+            #plt.cla()
+            #plt.gcf().clear()
+            #plt.close()
+            graficar()
 
     def limites(tecla):
         global sem
